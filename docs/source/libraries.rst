@@ -13,5 +13,4 @@ Here is where the Libraries API's descriptions are located.
     ESPNOW <api/espnow>
     GPIO <api/gpio>
     RainMaker <api/rainmaker>
-    Reset Reason <api/reset_reason>
     Wi-Fi <api/wifi>
