@@ -3,12 +3,7 @@ name: Documentation Build and Production Deploy CI
 on:
   push:
     branches:
-    - master
     - release/*
-    paths:
-    - 'docs/**'
-    - '.github/workflows/docs.yml'
-  pull_request:
     paths:
     - 'docs/**'
     - '.github/workflows/docs.yml'
