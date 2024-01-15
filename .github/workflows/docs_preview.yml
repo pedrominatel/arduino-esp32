@@ -8,10 +8,10 @@ on:
     paths:
     - 'docs/**'
     - '.github/workflows/docs.yml'
-  pull_request:
-    paths:
-    - 'docs/**'
-    - '.github/workflows/docs.yml'
+  # pull_request:
+  #   paths:
+  #   - 'docs/**'
+  #   - '.github/workflows/docs.yml'
 
 jobs:
 
@@ -30,15 +30,7 @@ jobs:
         python-version: '3.10'
     - name: Deploy Preview
       env:
-        # Deploy to production server
-        # DOCS_BUILD_DIR: "./docs/_build/"
-        # DOCS_DEPLOY_PRIVATEKEY: ${{ secrets.DOCS_PROD_PRIVATEKEY }}
-        # DOCS_DEPLOY_PATH: ${{ secrets.DOCS_PROD_PATH }}
-        # DOCS_DEPLOY_SERVER: ${{ secrets.DOCS_SERVER }}
-        # DOCS_DEPLOY_SERVER_USER: ${{ secrets.DOCS_PROD_USER }}
-        # DOCS_DEPLOY_URL_BASE: ${{ secrets.DOCS_PROD_URL_BASE }}
         # Deploy to preview server
-        TYPE: "preview"
         # DOCS_BUILD_DIR: "./docs/_build"
         DOCS_DEPLOY_PRIVATEKEY: ${{ secrets.DOCS_KEY }}
         DOCS_DEPLOY_PATH: ${{ secrets.DOCS_PATH }}
