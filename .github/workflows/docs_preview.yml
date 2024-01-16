@@ -7,10 +7,10 @@ on:
     paths:
     - 'docs/**'
     - '.github/workflows/docs_preview.yml'
-    pull_request:
-      paths:
-      - 'docs/**'
-      - '.github/workflows/docs_preview.yml'
+  pull_request:
+    paths:
+    - 'docs/**'
+    - '.github/workflows/docs_preview.yml'
 
 jobs:
 
