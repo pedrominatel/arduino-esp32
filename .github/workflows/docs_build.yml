@@ -15,8 +15,8 @@ on:
 
 jobs:
 
-  build-docs:
-    name: Build ESP-Docs
+  deploy-preview-docs:
+    name: Deploy Documentation
     runs-on: ubuntu-22.04
     defaults:
       run:
@@ -28,44 +28,15 @@ jobs:
     - uses: actions/setup-python@v4
       with:
         python-version: '3.10'
-    - name: Build
-      run: |
-        sudo apt update
-        sudo apt install python3-pip python3-setuptools
-        # GitHub CI installs pip3 and setuptools outside the path.
-        # Update the path to include them and run.
-        cd ./docs
-        PATH=/home/runner/.local/bin:$PATH pip3 install -r requirements.txt --prefer-binary
-        PATH=/home/runner/.local/bin:$PATH SPHINXOPTS="-W" build-docs -l en
-    - name: Archive Docs
-      uses: actions/upload-artifact@v2
-      with:
-        name: docs
-        path: docs
-
-  deploy-prod-docs:
-    name: Deploy Documentation on Production
-    runs-on: ubuntu-22.04
-    defaults:
-      run:
-        shell: bash
-    steps:
-    - uses: actions/checkout@v3
-      with:
-        submodules: true
-    - uses: actions/setup-python@v4
-      with:
-        python-version: '3.10'
-    - name: Deploy Documentation
+    - name: Deploy Preview
       env:
-        # Deploy to production server
-        # DOCS_BUILD_DIR: "./docs/_build/"
-        DOCS_DEPLOY_PRIVATEKEY: ${{ secrets.DOCS_PROD_PRIVATEKEY }}
-        DOCS_DEPLOY_PATH: ${{ secrets.DOCS_PROD_PATH }}
-        DOCS_DEPLOY_SERVER: ${{ secrets.DOCS_SERVER }}
-        DOCS_DEPLOY_SERVER_USER: ${{ secrets.DOCS_PROD_USER }}
-        DOCS_DEPLOY_URL_BASE: ${{ secrets.DOCS_PROD_URL_BASE }}
         # Deploy to preview server
+        # DOCS_BUILD_DIR: "./docs/_build"
+        DOCS_DEPLOY_PRIVATEKEY: ${{ secrets.DOCS_KEY }}
+        DOCS_DEPLOY_PATH: ${{ secrets.DOCS_PATH }}
+        DOCS_DEPLOY_SERVER: ${{ secrets.DOCS_SERVER }}
+        DOCS_DEPLOY_SERVER_USER: ${{ secrets.DOCS_USER }}
+        DOCS_DEPLOY_URL_BASE: ${{ secrets.DOCS_URL }}
       run: |
         sudo apt update
         sudo apt install python3-pip python3-setuptools
@@ -80,4 +51,3 @@ jobs:
         export DOCS_BUILD_DIR=$GITHUB_WORKSPACE/docs/
         cd $GITHUB_WORKSPACE/docs
         deploy-docs
-      
