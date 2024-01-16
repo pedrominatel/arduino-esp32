@@ -6,7 +6,7 @@ on:
     - release/*
     paths:
     - 'docs/**'
-    - '.github/workflows/docs.yml'
+    - '.github/workflows/docs_deploy.yml'
 
 jobs:
 
